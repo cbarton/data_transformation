@@ -5,6 +5,10 @@ require 'fileutils'
 class DataTransformationGenerator < Rails::Generators::NamedBase
 	include Rails::Generators::Migration
 
+  def self.source_root
+    @source_root ||= File.dirname(__FILE__) + '/templates'
+  end
+
 	def create_transform_file
 		create_transforms_folder
 		migration_template "transform.rb", "db/transforms/#{file_name}.rb"
