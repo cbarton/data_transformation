@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "data_transformations/version"
+require "data_transformation/version"
 
 Gem::Specification.new do |s|
-  s.name        = "data_transformations"
+  s.name        = "data_transformation"
   s.version     = DataTransformations::VERSION
 	s.platform   	= Gem::Platform::RUBY
   s.authors     = ["Chris Barton"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = "Rails 3 Data Transformations"
   s.description = "To keep the necessity of changing data out of migrations, transformations keep track of that"
 
-  s.rubyforge_project = "data_transformations"
+  s.rubyforge_project = "data_transformation"
 	s.required_rubygems_version = ">= 1.3.6"
 
   s.files         = `git ls-files`.split("\n")
