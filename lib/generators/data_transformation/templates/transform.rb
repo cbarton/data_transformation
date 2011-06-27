@@ -1,4 +1,4 @@
-class <%= migration_class_name %> < DataTransformation::Transform
+class <%= migration_class_name %> < DataTransformation::Transformation
 	def self.up
 	end
 

@@ -3,7 +3,7 @@ require 'active_record/migration'
 module DataTransformation
 	class Transformer < ActiveRecord::Migrator
 		class << self
-			def transform(tranforms_path, target_version=nil)
+			def transform(transforms_path, target_version=nil)
 				migrate(transforms_path, target_version)
 			end			
 		end
