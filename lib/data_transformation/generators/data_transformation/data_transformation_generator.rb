@@ -5,7 +5,7 @@ require 'fileutils'
 class DataTransformationGenerator < Rails::Generators::NamedBase
 	include Rails::Generators::Migration
 
-	def create_transfrom_file
+	def create_transform_file
 		create_transforms_folder
 		migration_template "transform.rb", "db/transforms/#{file_name}.rb"
 	end	
