@@ -1,0 +1,11 @@
+Description:
+    Stubs out a new database data transformation. Pass the transform name, either
+    CamelCased or under_scored, and an optional list of attribute pairs as arguments.
+
+    A transform class is generated in db/transforms prefixed by a timestamp of the current date and time.
+
+Example:
+    `rails generate data_transformation PopulateUsers`
+
+    If the current date is May 14, 2008 and the current time 09:09:12, this creates the PopulateUsers transformation 
+    db/tranforms/20080514090912_populate_users.rb
