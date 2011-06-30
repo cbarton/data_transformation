@@ -1,10 +1,4 @@
 namespace :db do
-	task :load_config => :rails_env do
-		DataTransformation::Transformer.migration_paths = Rails.application.paths['db/transforms'].to_a
-	end
-
-	desc "Transform the database (options: VERSION=x, VERBOSE=false)."
-	task :transform => :environment do
 		module ActiveRecord
 			class Migrator
 				def self.schema_migrations_table_name
@@ -40,8 +34,12 @@ namespace :db do
 				end
 			end
 		end
+	task :load_config => :rails_env do
+		DataTransformation::Transformer.migration_paths = Rails.application.paths['db/transforms'].to_a
+	end
 
-	
+	desc "Transform the database (options: VERSION=x, VERBOSE=false)."
+	task :transform => :environment do
 		DataTransformation::Transformation.verbose = ENV['VERBOSE'] ? ENV['VERBOSE'] == "true" : true
 		DataTransformation::Transformer.transform('db/transforms/', ENV['VERSION'] ? ENV['VERSION'].to_i : nil)
 		Rake::Task['db:schema:dump'].invoke	if ActiveRecord::Base.schema_format == :ruby
