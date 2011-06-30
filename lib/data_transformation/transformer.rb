@@ -15,6 +15,18 @@ module DataTransformation
 			def migrations_path
 				migrations_paths.first
 			end
+
+			def down
+				raise "Unimplemented as a Transformation"
+			end
+
+			def forward 
+				raise "Unimplemented as a Transformation"
+			end
+
+			def rollback
+				raise "Unimplemented as a Transformation"
+			end
 		end
 
 
