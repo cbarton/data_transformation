@@ -12,6 +12,35 @@ namespace :db do
 				end
 			end
 		end
+
+		module ActiveRecord
+			module ConnectionAdapters
+				module SchemaStatements
+					def initialize_schema_migrations_table
+        	  sm_table = ActiveRecord::Migrator.schema_migrations_table_name
+
+        		unless table_exists?(sm_table)
+          		create_table(sm_table, :id => false) do |schema_migrations_table|
+            		schema_migrations_table.column :version, :string, :null => false
+          		end
+          		add_index sm_table, :version, :unique => true,
+            		:name => "#{Base.table_name_prefix}unique_schema_transforms#{Base.table_name_suffix}"
+
+          		# Backwards-compatibility: if we find schema_info, assume we've
+          		# migrated up to that point:
+          		si_table = Base.table_name_prefix + 'schema_info' + Base.table_name_suffix
+
+          		if table_exists?(si_table)
+           			old_version = select_value("SELECT version FROM #{quote_table_name(si_table)}").to_i
+           			assume_migrated_upto_version(old_version)
+          			drop_table(si_table)
+          		end
+      			end
+					end
+				end
+			end
+		end
+
 	
 		DataTransformation::Transformation.verbose = ENV['VERBOSE'] ? ENV['VERBOSE'] == "true" : true
 		DataTransformation::Transformer.transform('db/transforms/', ENV['VERSION'] ? ENV['VERSION'].to_i : nil)
