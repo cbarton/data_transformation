@@ -49,7 +49,7 @@ namespace :db do
 
 	task :abort_if_pending_migrations => :environment do
 		if defined? DataTransformation
-			pending_transformations = DataTransformation::Transformer.new(:up, DataTransformation::Transformer.migration_paths).pending_migrations
+			pending_transformations = DataTransformation::Transformer.new(:up, DataTransformation::Transformer.migrations_paths).pending_migrations
 
 			if pending_migrations.any?
 				puts "You have #{pending_migrations.size} pending transformations."
