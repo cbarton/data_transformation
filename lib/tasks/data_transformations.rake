@@ -7,7 +7,7 @@ namespace :db do
 	task :transform => :environment do
 		module ActiveRecord
 			class Migrator
-				def self.schema_migrations_table
+				def self.schema_migrations_table_name
 					Base.table_name_prefix + "schema_transforms" + Base.table_name_suffix
 				end
 			end
@@ -15,7 +15,7 @@ namespace :db do
 	
 		DataTransformation::Transformation.verbose = ENV['VERBOSE'] ? ENV['VERBOSE'] == "true" : true
 		DataTransformation::Transformer.transform('db/transforms/', ENV['VERSION'] ? ENV['VERSION'].to_i : nil)
-		
+		Rake::Task['db:schema:dump'].invoke	if ActiveRecord::Base.schema_format == :ruby
 	end
 
 	task :abort_if_pending_migrations => :environment do
