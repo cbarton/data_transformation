@@ -51,10 +51,10 @@ namespace :db do
 		if defined? DataTransformation
 			pending_transformations = DataTransformation::Transformer.new(:up, DataTransformation::Transformer.migrations_paths).pending_migrations
 
-			if pending_migrations.any?
-				puts "You have #{pending_migrations.size} pending transformations."
-				pending_migrations.each do |m|
-					puts '  %4d %s' % [pending_migration.version, pending_migration.name]
+			if pending_transformations.any?
+				puts "You have #{pending_transformations.size} pending transformations."
+				pending_transformations.each do |m|
+					puts '  %4d %s' % [m.version, m.name]
 				end
 				abort %{Run "rake db:transform" to update your database then try again.}
 			end
