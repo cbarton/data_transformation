@@ -4,3 +4,4 @@ Gemfile.lock
 pkg/*
 spec/debug.log
 *.swp
+*.sqlite3

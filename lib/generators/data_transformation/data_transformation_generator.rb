@@ -1,5 +1,4 @@
-require 'rails/generators/active_record'
-require 'rails/generators/migration'
+require 'rails/generators'
 require 'fileutils'
 
 class DataTransformationGenerator < Rails::Generators::NamedBase
